@@ -1,0 +1,19 @@
+{
+  "name": "CrackInvoice",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "dependencies": {
+    "lodash": "^4.13.1",
+    "react": "15.2.1",
+    "react-native": "0.29.1",
+    "react-native-button": "^1.6.0",
+    "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
+    "react-native-fs": "^1.5.1",
+    "react-native-keyboard-aware-scroll-view": "^0.1.2",
+    "react-native-message-bar": "^1.6.0",
+    "react-native-qrcode": "^0.2.2"
+  }
+}
