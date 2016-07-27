@@ -18,7 +18,9 @@ import {Button} from './components/Button';
 import {QRCodeScreen} from './components/QRCodeScreen';
 import {CreateQRCode} from './components/CreateQRCode'
 import {DisplayQRCode} from './components/DisplayQRCode'
-import {readFile, QR_PATH} from './utils/IO';
+import store from 'react-native-simple-store';
+var MessageBarAlert = require('react-native-message-bar').MessageBar;
+var MessageBarManager = require('react-native-message-bar').MessageBarManager;
 
 console.disableYellowBox = true;
 
@@ -44,27 +46,29 @@ export class Index extends Component {
     constructor(props) {
         super(props);
         this.state = {};
-        
     }
 
     componentDidMount() {
-       readFile(QR_PATH).then((qRcode) => {
+       store.get('qrCode').then((qRcode) => {
             this.setState({qRcode: qRcode});
         }); 
+       MessageBarManager.registerMessageBar(this.refs.alert);
+    }
+
+    componentWillUnmount() {
+        MessageBarManager.unregisterMessageBar();
     }
 
     render() {
         return (
             <View style={styles.contentContainer}>
+                <MessageBarAlert ref="alert" />
                 <Button
                     onPress={this._onPressScanQRCode.bind(this)}
                     text='扫描二维码'/>
-                {this.state.qRcode ? (
-                    <Button
+                <Button
                     onPress={this._onPressDisplayQRCode.bind(this)}
                     text='显示二维码'/>
-                    ) : null}
-                
                 <Button
                     onPress={this._onPressCreateQRCode.bind(this)}
                     text='生成二维码'/>
@@ -80,11 +84,22 @@ export class Index extends Component {
     }
 
     _onPressDisplayQRCode() {
+        if (!this.state.qRcode) {
+            MessageBarManager.showAlert({
+                title: '错误',
+                message: '您还没有可用的二维码，请点击生成二维码',
+                alertType: 'error',
+                shouldHideOnTap: true,
+                viewTopOffset: 100,
+            });
+            return;
+        }
+
         this.props.navigator.push({
             component: DisplayQRCode,
             title: '显示二维码',
             passProps: {
-                qRcode: this.state.qRcode,
+                qRcode: JSON.stringify(this.state.qRcode),
             },
         });
     }

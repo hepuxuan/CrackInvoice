@@ -3,7 +3,6 @@ import {
     StyleSheet,
     View,
 } from 'react-native';
-import {readFile, QR_PATH} from '../utils/IO';
 var QRCode = require('react-native-qrcode');
 
 export class DisplayQRCode extends Component {

@@ -9,11 +9,11 @@ import {
 
 import {Button} from './Button';
 import {Index} from '../app';
-import {writeFile, QR_PATH} from '../utils/IO';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 var _ = require('lodash');
 var MessageBarAlert = require('react-native-message-bar').MessageBar;
 var MessageBarManager = require('react-native-message-bar').MessageBarManager;
+import store from 'react-native-simple-store';
 
 export class CreateQRCode extends Component {
     constructor(props) {
@@ -25,11 +25,12 @@ export class CreateQRCode extends Component {
             bankName: null,
             bankAccount: null,
             saved: false,
+            offsetY: 0,
         };
     }
     _onSaveQRCode(companyInfo) {
-        let qrCode = JSON.stringify(_.pick(this.state, ['companyName', 'taxRegistrationNumber', 'phone', 'bankName', 'bankAccount']));
-        writeFile(qrCode, QR_PATH).then(() => {
+        let qrCode = _.pick(this.state, ['companyName', 'taxRegistrationNumber', 'phone', 'bankName', 'bankAccount']);
+        store.save('qrCode', qrCode).then(() => {
             let newState = _.clone(this.state);
             newState.saved = true;
             this.setState(newState);
@@ -37,16 +38,15 @@ export class CreateQRCode extends Component {
                 title: '保存成功',
                 message: '保存成功， 请点击确定返回首页',
                 alertType: 'success',
-                shouldHideAfterDelay: false,
                 shouldHideOnTap: true,
+                viewTopOffset: 70,
             });
+
+            this.refs.scroll.scrollToPosition(0, 0, true);
         });
     }
     _onGoBack() {
-        this.props.navigator.push({
-            component: Index,
-            title: '税表小助手',
-        }); 
+        this.props.navigator.pop();
     }
     _onInputChange(text, attr) {
         let newState = _.clone(this.state);
@@ -65,9 +65,11 @@ export class CreateQRCode extends Component {
     render() {
         return (
             <View style={styles.contentContainer}>
+                <MessageBarAlert ref="alert" />
                 <KeyboardAwareScrollView style={styles.scrollView}
+                    ref="scroll"
                     contentContainerStyle={styles.scrollContentContainer}>
-                    <MessageBarAlert ref="alert" />
+                    
                     <TextInput
                         ref="1"
                         style={styles.textInput}

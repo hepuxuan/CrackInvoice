@@ -13,7 +13,7 @@ import {serialize} from '../utils/Serialize'
 import {writeFile, INVOICE_PATH} from '../utils/IO'
 
 import Camera from 'react-native-camera';
-var Button = require('react-native-button');
+let Button = require('react-native-button');
 
 export class QRCodeScreen extends Component {
     constructor(props) {
