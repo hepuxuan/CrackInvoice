@@ -24,12 +24,13 @@ export class CreateQRCode extends Component {
             phone: null,
             bankName: null,
             bankAccount: null,
+            address: null,
             saved: false,
             offsetY: 0,
         };
     }
     _onSaveQRCode(companyInfo) {
-        let qrCode = _.pick(this.state, ['companyName', 'taxRegistrationNumber', 'phone', 'bankName', 'bankAccount']);
+        let qrCode = _.pick(this.state, ['companyName', 'taxRegistrationNumber', 'phone', 'bankName', 'bankAccount', 'address']);
         store.save('qrCode', qrCode).then(() => {
             let newState = _.clone(this.state);
             newState.saved = true;
@@ -71,14 +72,12 @@ export class CreateQRCode extends Component {
                     contentContainerStyle={styles.scrollContentContainer}>
                     
                     <TextInput
-                        ref="1"
                         style={styles.textInput}
                         onChangeText={(text) => this._onInputChange(text, 'companyName')}
                         text={this.state.companyName}
                         placeholder="公司名称"
                     />
                     <TextInput
-                        ref="2"
                         style={styles.textInput}
                         onChangeText={(text) => this._onInputChange(text, 'taxRegistrationNumber')}
                         text={this.state.taxRegistrationNumber}
@@ -87,10 +86,16 @@ export class CreateQRCode extends Component {
                     />
                     <TextInput
                         style={styles.textInput}
+                        onChangeText={(text) => this._onInputChange(text, 'address')}
+                        text={this.state.address}
+                        placeholder="地址"
+                    />
+                    <TextInput
+                        style={styles.textInput}
                         onChangeText={(text) => this._onInputChange(text, 'phone')}
                         text={this.state.phone}
                         keyboardType="numeric"
-                        placeholder="电话（一般为座机）"
+                        placeholder="电话"
                     />
                     <TextInput
                         style={styles.textInput}
