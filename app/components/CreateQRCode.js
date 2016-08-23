@@ -20,7 +20,7 @@ export class CreateQRCode extends Component {
         super(props);
         this.state = {
             companyName: null,
-            taxRegistrationNumber: null,
+            taxPayerNumber: null,
             phone: null,
             bankName: null,
             bankAccount: null,
@@ -29,8 +29,8 @@ export class CreateQRCode extends Component {
             offsetY: 0,
         };
     }
-    _onSaveQRCode(companyInfo) {
-        let qrCode = _.pick(this.state, ['companyName', 'taxRegistrationNumber', 'phone', 'bankName', 'bankAccount', 'address']);
+    _onSaveQRCode() {
+        let qrCode = _.pick(this.state, ['companyName', 'taxPayerNumber', 'phone', 'bankName', 'bankAccount', 'address']);
         store.save('qrCode', qrCode).then(() => {
             let newState = _.clone(this.state);
             newState.saved = true;
@@ -79,8 +79,8 @@ export class CreateQRCode extends Component {
                     />
                     <TextInput
                         style={styles.textInput}
-                        onChangeText={(text) => this._onInputChange(text, 'taxRegistrationNumber')}
-                        text={this.state.taxRegistrationNumber}
+                        onChangeText={(text) => this._onInputChange(text, 'taxPayerNumber')}
+                        text={this.state.taxPayerNumber}
                         keyboardType="numeric"
                         placeholder="纳税人识别号"
                     />
@@ -129,7 +129,6 @@ var styles = StyleSheet.create({
     contentContainer: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
     },
     scrollContentContainer: {
         flex: 1,

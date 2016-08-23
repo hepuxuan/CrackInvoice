@@ -49,9 +49,6 @@ export class Index extends Component {
     }
 
     componentDidMount() {
-       store.get('qrCode').then((qRcode) => {
-            this.setState({qRcode: qRcode});
-        }); 
        MessageBarManager.registerMessageBar(this.refs.alert);
     }
 
@@ -84,24 +81,25 @@ export class Index extends Component {
     }
 
     _onPressDisplayQRCode() {
-        if (!this.state.qRcode) {
-            MessageBarManager.showAlert({
-                title: '错误',
-                message: '您还没有可用的二维码，请点击生成二维码',
-                alertType: 'error',
-                shouldHideOnTap: true,
-                viewTopOffset: 100,
-            });
-            return;
-        }
-
-        this.props.navigator.push({
-            component: DisplayQRCode,
-            title: '显示二维码',
-            passProps: {
-                qRcode: JSON.stringify(this.state.qRcode),
-            },
-        });
+        store.get('qrCode').then((qRcode) => {
+            if (qRcode) {
+                this.props.navigator.push({
+                    component: DisplayQRCode,
+                    title: '显示二维码',
+                    passProps: {
+                        qRcode: JSON.stringify(qRcode),
+                    },
+                });
+            } else {
+                MessageBarManager.showAlert({
+                    title: '错误',
+                    message: '您还没有可用的二维码，请点击生成二维码',
+                    alertType: 'error',
+                    shouldHideOnTap: true,
+                    viewTopOffset: 100,
+                });
+            }
+        }); 
     }
 
     _onPressCreateQRCode() {
@@ -118,7 +116,6 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         flex: 1,
-        alignItems: 'center',
         justifyContent: 'center',
     }
 });

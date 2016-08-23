@@ -1,6 +1,6 @@
 const KEY_TO_DISPLAY_KEY_MAP = {
 	'companyName': '公司名称',
-	'taxRegistrationNumber': '纳税人识别号',
+	'taxPayerNumber': '纳税人识别号',
 	'phone': '电话',
     'address': '地址',
 	'bankName': '开户银行',

@@ -25,6 +25,8 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8B623C65AE9C4D9E8C22C917 /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 114C8C5E40444CC79BA8B760 /* libRNFS.a */; };
 		EB49AA4BBBB34602A8B13185 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B3500FD00048D9A54BF720 /* libRCTCamera.a */; };
+		FF4ECEC11D5EF7CE00BB946F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF4ECEC01D5EF7CE00BB946F /* CloudKit.framework */; };
+		FF534B321D5ED4F8002D34E2 /* RCTICloudDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = FF534B311D5ED4F8002D34E2 /* RCTICloudDocument.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +149,9 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		B8B3500FD00048D9A54BF720 /* libRCTCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTCamera.a; sourceTree = "<group>"; };
 		FEBC8AB8D43C444C9442C3A6 /* RNFS.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFS.xcodeproj; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; };
+		FF34EA041D5EF6C20001E56E /* CrackInvoice.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = CrackInvoice.entitlements; path = CrackInvoice/CrackInvoice.entitlements; sourceTree = "<group>"; };
+		FF4ECEC01D5EF7CE00BB946F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		FF534B311D5ED4F8002D34E2 /* RCTICloudDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCTICloudDocument.m; path = "../node_modules/react-native-icloud/RCTICloudDocument.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +175,7 @@
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
+				FF4ECEC11D5EF7CE00BB946F /* CloudKit.framework in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				EB49AA4BBBB34602A8B13185 /* libRCTCamera.a in Frameworks */,
@@ -256,6 +262,8 @@
 		13B07FAE1A68108700A75B9A /* CrackInvoice */ = {
 			isa = PBXGroup;
 			children = (
+				FF34EA041D5EF6C20001E56E /* CrackInvoice.entitlements */,
+				FF534B311D5ED4F8002D34E2 /* RCTICloudDocument.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -313,6 +321,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				FF4ECEC01D5EF7CE00BB946F /* CloudKit.framework */,
 				13B07FAE1A68108700A75B9A /* CrackInvoice */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* CrackInvoiceTests */,
@@ -401,6 +410,11 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = J5PR6RJDLY;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -609,6 +623,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF534B321D5ED4F8002D34E2 /* RCTICloudDocument.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
@@ -683,6 +698,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_ENTITLEMENTS = CrackInvoice/CrackInvoice.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
@@ -711,6 +727,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_ENTITLEMENTS = CrackInvoice/CrackInvoice.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				HEADER_SEARCH_PATHS = (
