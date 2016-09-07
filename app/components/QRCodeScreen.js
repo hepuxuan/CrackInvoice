@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 
 import {serialize} from '../utils/Serialize';
-import {writeFile, INVOICE_PATH} from '../utils/IO';
 import cIWebSocket from '../utils/WebSocket';
 
 import Camera from 'react-native-camera';

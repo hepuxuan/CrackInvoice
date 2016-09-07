@@ -45,7 +45,6 @@ export class CrackInvoice extends Component {
 export class Index extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
     }
 
     componentDidMount() {
